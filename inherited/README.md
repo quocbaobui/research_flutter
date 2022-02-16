@@ -23,6 +23,7 @@ Ví dụ : https://github.com/quocbaobui/research_flutter/blob/research-inherite
 
 - Phải add trực tiếp vào giao diện người dùng và bắt buộc cần "BuildContext" 
 - Trong một số trường hợp cần tách biệt với Widget và cần hạn chế sự phụ thuộc vào context
+- không thể truy cập từ Business layer.
   -> Vì vậy package "get it" giải quyết vấn đề tách biệt khai báo dependency với UI
 
 ### 4.Nguồn Tham khảo
