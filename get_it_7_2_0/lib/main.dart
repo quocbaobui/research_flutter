@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-
 import 'example.dart';
-import 'locator.dart';
+import 'service_locator.dart';
 
 void main() {
   setupLocator();
-  runApp(const MaterialApp(home: MyApp()));
+  runApp(const MaterialApp(home: WidgetAGetIt()));
 }
