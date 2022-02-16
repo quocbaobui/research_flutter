@@ -10,21 +10,31 @@
 
 ### 2. Đăng ký
 
-/*
-GetIt locator = GetIt.instance;
+ -  Khởi tạo
+    ```yaml  
+        GetIt locator = GetIt.instance; 
+    ```
 - Đăng ký Factory
-locator.registerFactory<Students>(() => Students());
+    ```yaml  
+    locator.registerFactory<Students>(() => Students());
+    ```
 - Đăng ký SingleTon
-locator.registerSingleton<School>(School());
+     ```yaml  
+    locator.registerSingleton<School>(School());
+    ```
 - Đăng ký lazySingleton
-locator.registerLazySingleton<ClassRoom>(() => ClassRoom());
-*/
+     ```yaml  
+    locator.registerLazySingleton<ClassRoom>(() => ClassRoom());
+    ```
 
-- Một class chỉ được đăng ký một lần duy nhất, trường hợp cần thiết phải đăng ký lại đặt allowReassignment = TRUE
-locator.allowReassignment = true;
-
+- Một class chỉ được đăng ký một lần duy nhất, trường hợp cần thiết phải đăng ký lại đặt # **allowReassignment = TRUE**
+     ```yaml  
+    locator.allowReassignment = true;
+    ```
 - Xóa đăng ký tất cả
-locator.reset();
+    ```yaml  
+    locator.reset();
+    ```
 
 - Factory : Khi gọi lấy object thì sẽ trả về một instance mới
 
@@ -34,12 +44,16 @@ locator.reset();
 
 - Singleton sẽ khởi tạo khi app khởi động
 
-### 3. Sủ dụng lấy dữ liệu
+### 3. Sủ dụng
 
 - Lấy dữ liệu đồng bộ 
-locator.get<T>()  
+    ```yaml  
+    locator.get<T>()  
+    ```
 - Lấy dữ liệu không đồng bộ
-locator.getAsync<T>() 
+    ```yaml  
+    .getAsync<T>() 
+    ```
 
 
 ### 4.Nguồn Tham khảo
