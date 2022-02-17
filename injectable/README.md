@@ -4,8 +4,7 @@
 ### 1. Injectable
 
 - Injectable là convenient code generator cho get it
-- Thay vì viết code để đăng ký các dependancy như ở "service_locator" trong example research "get it"
-https://github.com/quocbaobui/research_flutter/blob/main/get_it_7_2_0/lib/service_locator.dart
+- Thay vì viết code để đăng ký các dependancy thay vì viết thủ công như ở "service_locator" trong example research "get it"
 thì với injectable && **build runner** chúng ta chỉ cần thêm các anotation trên các class cần inject thì nó sẽ tự động đăng ký và xử lý
 - Thường dùng cho các Repo, Service...
 - Hỗ trợ đăng ký trong các môi trường khác nhau test,dev...
@@ -69,18 +68,19 @@ thì với injectable && **build runner** chúng ta chỉ cần thêm các anota
    ```yaml  
     @module  
     abstract class RegisterModule {  
+    preResolve
     Future<SharedPreferences> get prefs => SharedPreferences.getInstance();  
     }  
     ```
 
 ### 4. Run generator
 
-- Generate file service_locator.config.dart co the sua chua
+- Generate file service_locator.config.dart có thể sửa chữa
     ```yaml  
     flutter packages pub run build_runner watch  
     ```
 
-- Generate file service_locator.config.dart chay mot lan
+- Generate file service_locator.config.dart chạy một lần
     ```yaml  
     flutter packages pub run build_runner build  
     ```
