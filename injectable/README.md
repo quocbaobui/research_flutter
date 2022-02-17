@@ -7,6 +7,7 @@
 - Thay vì viết code để đăng ký các dependancy như ở "service_locator" trong example research "get it"
 https://github.com/quocbaobui/research_flutter/blob/main/get_it_7_2_0/lib/service_locator.dart
 thì với injectable && **build runner** chúng ta chỉ cần thêm các anotation trên các class cần inject thì nó sẽ tự động đăng ký và xử lý
+- Thường dùng cho các Repo, Service...
 - Hỗ trợ đăng ký trong các môi trường khác nhau test,dev...
 - 
 
