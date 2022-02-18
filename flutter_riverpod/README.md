@@ -21,7 +21,7 @@
       }),
     );
     ```
-   * [```Example: provider1_example.dart```](https://www.google.com)
+   * [```Example: provider1_example.dart```](https://github.com/quocbaobui/research_flutter/blob/main/flutter_riverpod/lib/provider_exp/provider1_example.dart)
    
 - ChangeNotifierProvider sẽ lắng nghe sự thay đổi của object mà nó cung cấp. Trường hợp ở ```Example: provider1_example.dart``` sẽ không thấy thay đổi Text nên cần sử dụng ChangeNotifierProvider để lắng nghe thay đổi  ```(ClassTestA)```
    * ClassTestA sẽ được viết lại
@@ -58,7 +58,7 @@
               }),
             );
         ```
-   * [```Example: provider2_example.dart```](https://www.google.com)
+   * [```Example: provider2_example.dart```](https://github.com/quocbaobui/research_flutter/blob/main/flutter_riverpod/lib/provider_exp/provider2_example.dart)
     * Cách đọc giá trị object
         * ```context.watch<T>()```, tiện ích sẽ listen các thay đổi trên `<T>`
         * ```context.read<T>()```, tiện ích sẽ trả về  `<T>` và không listen
@@ -106,7 +106,7 @@
             );
           }
         ```
-   * [```Example: provider2_example.dart```](https://www.google.com)    
+   * [```Example: provider3_example.dart```](https://github.com/quocbaobui/research_flutter/blob/main/flutter_riverpod/lib/provider_exp/provider3_example.dart)    
 - Vì ở trong bất kì class Widget nào ta cũng có thể truy cập vào provider thông qua 
 ```dart
   Provider.of<AnyType>(context)
