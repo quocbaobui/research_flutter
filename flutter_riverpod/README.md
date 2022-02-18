@@ -21,7 +21,7 @@
       }),
     );
     ```
-   * [```Example: provider1_example.dart```](https://github.com/quocbaobui/research_flutter/blob/main/flutter_riverpod/lib/provider_exp/provider1_example.dart)
+   * [```Example: provider1_example.dart```](https://www.google.com)
    
 - ChangeNotifierProvider sẽ lắng nghe sự thay đổi của object mà nó cung cấp. Trường hợp ở ```Example: provider1_example.dart``` sẽ không thấy thay đổi Text nên cần sử dụng ChangeNotifierProvider để lắng nghe thay đổi  ```(ClassTestA)```
    * ClassTestA sẽ được viết lại
@@ -58,7 +58,7 @@
               }),
             );
         ```
-   * [```Example: provider2_example.dart```](https://github.com/quocbaobui/research_flutter/blob/main/flutter_riverpod/lib/provider_exp/provider2_example.dart)
+   * [```Example: provider2_example.dart```](https://www.google.com)
     * Cách đọc giá trị object
         * ```context.watch<T>()```, tiện ích sẽ listen các thay đổi trên `<T>`
         * ```context.read<T>()```, tiện ích sẽ trả về  `<T>` và không listen
@@ -106,18 +106,20 @@
             );
           }
         ```
-   * [```Example: provider3_example.dart```](https://github.com/quocbaobui/research_flutter/blob/main/flutter_riverpod/lib/provider_exp/provider3_example.dart)    
+   * [```Example: provider2_example.dart```](https://www.google.com)    
 - Vì ở trong bất kì class Widget nào ta cũng có thể truy cập vào provider thông qua 
 ```dart
   Provider.of<AnyType>(context)
 ```
- Dễ sảy ra ProviderNotFoundException trở thành vấn đề lớn  nếu ứng dụng phình to ra. Ở ví dụ trên ta dễ dàng thấy 
-         * Khi lấy @myName từ class ClassTestB nếu ta truyền nhầm ```context``` thay vì ```context4``` thì trình biên dịch sẽ không báo lỗi, nhưng khi run app thì sẽ báo lỗi ```"Could not find the correct Provider<ClassTestB> above this WidgetB Widget"```
-         * Lấy dữ liệu  sai 
+* Dễ sảy ra ProviderNotFoundException trở thành vấn đề lớn  nếu ứng dụng phình to ra. Ở ví dụ trên ta dễ dàng thấy 
+Khi lấy @myName từ class ClassTestB nếu ta truyền nhầm ```context``` thay vì ```context4``` thì trình biên dịch sẽ không báo lỗi, nhưng khi run app thì sẽ báo lỗi ```"Could not find the correct Provider<ClassTestB> above this WidgetB Widget```
+        
+     * Lấy dữ liệu  sai 
         ```dart
             Provider.of<ClassTestB>(context).myName;
         ```
-        * Lấy dữ liệu đúng 
+        
+    * Lấy dữ liệu đúng 
         ```dart
             Provider.of<ClassTestB>(context).myName;
         ```
