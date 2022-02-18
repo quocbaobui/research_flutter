@@ -2,8 +2,8 @@
 # Research Riverpod
 ### 1. Provider
 - Thư viện quản lý State cho ứng dụng
-- Có thể hiểu Provider là một cải tiến củaInheritedWidget. Widget này sẽ cung cấp object ```(ClassTestA)```) mà có thể sử dụng trong **Widget Tree** được bọc bởi Provider
-- Consumer sử dụng để lấy ```(ClassTestA)``` sử dụng
+- Có thể hiểu Provider là một cải tiến của InheritedWidget. Widget này sẽ cung cấp object ```(ClassTestA)```) mà có thể sử dụng trong **Widget Tree** được bọc bởi Provider
+- Consumer sử dụng để lấy object ```(ClassTestA)```
     ```dart
     return Provider<ClassTestA>(
       create: (context) => ClassTestA(),
@@ -111,8 +111,8 @@
 ```dart
   Provider.of<AnyType>(context)
 ```
-* Dễ sảy ra ProviderNotFoundException trở thành vấn đề lớn  nếu ứng dụng phình to ra. Ở ví dụ trên ta dễ dàng thấy 
-Khi lấy @myName từ class ClassTestB nếu ta truyền nhầm ```context``` thay vì ```context4``` thì trình biên dịch sẽ không báo lỗi, nhưng khi run app thì sẽ báo lỗi ```"Could not find the correct Provider<ClassTestB> above this WidgetB Widget```
+* Dễ sảy ra ProviderNotFoundException trở thành vấn đề lớn nếu ứng dụng phình to ra. Ở ví dụ trên ta dễ dàng thấy 
+Khi lấy @myName từ class ClassTestB nếu ta truyền  ```context``` thay vì ```context4``` thì trình biên dịch sẽ không báo lỗi, nhưng khi run app thì sẽ báo lỗi ```"Could not find the correct Provider<ClassTestB> above this WidgetB Widget```
         
      * Lấy dữ liệu  sai 
         ```dart
@@ -124,7 +124,12 @@ Khi lấy @myName từ class ClassTestB nếu ta truyền nhầm ```context``` t
             Provider.of<ClassTestB>(context).myName;
         ```
 
-### => Vì những nhược điểm trên nên việc sử dụng Riverpod sẽ giúp ứng dụng hoàn toàn độc lập với Widget tree
+### 4. Riverpod sẽ giúp ứng dụng xử lý các vấn đề trên 
+
+- ***"Compile safe"***: Biên dịch an toàn, hạn chế tối đa lỗi "ProviderNotFoundException"
+- ***"Provider, without its limitations"*** - Riverpod có hỗ trợ multiple provider có cùng type; kết hợp các providers không đồng bộ & thêm providers từ mọi nơi
+- Không phụ thuộc vào BuildContext, có thể listen provider mà không cần BuildContext
+
 
 
         
