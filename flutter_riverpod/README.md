@@ -60,9 +60,9 @@
         ```
    * [```Example: provider2_example.dart```](https://www.google.com)
     * Cách đọc giá trị object
-        * ```context.watch<T>()```, tiện ích sẽ listen các thay đổi trên <T>
-        * ```context.read<T>()```, tiện ích sẽ trả về <T> và không listen
-        * ```contextcontext.select<T, R>(R cb(T value))```, listen một vài giá trị trên <T>
+        * ```context.watch<T>()```, tiện ích sẽ listen các thay đổi trên `<T>`
+        * ```context.read<T>()```, tiện ích sẽ trả về  `<T>` và không listen
+        * ```contextcontext.select<T, R>(R cb(T value))```, listen một vài giá trị trên `<T>`
         
 
 
