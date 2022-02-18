@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'models/my_class.dart';
+import '../models/my_class.dart';
 
 class MyAppProviderEx1 extends StatelessWidget {
   const MyAppProviderEx1({Key? key}) : super(key: key);

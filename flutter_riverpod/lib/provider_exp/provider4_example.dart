@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class MyAppProviderEx2 extends StatelessWidget {
-  const MyAppProviderEx2({Key? key}) : super(key: key);
+class MyAppProviderEx3 extends StatelessWidget {
+  const MyAppProviderEx3({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
