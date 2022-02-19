@@ -114,16 +114,40 @@
 ```
 -  Dễ xảy ra lỗi ProviderNotFoundException khi Run code. 
 [```Xem ví dụ "provider3_example.dart"```](https://github.com/quocbaobui/research_flutter/blob/main/flutter_riverpod/lib/provider_exp/provider3_example.dart)
-        
+- Giải thích cho vấn đề trên
+    ![stack Overflow](https://raw.githubusercontent.com/quocbaobui/research_flutter/research_flutter_riverpod/flutter_riverpod/assets/ex_provider_3_wf.png)
 - Nguyên nhân chính của vấn đề ProviderNotFoundException là chúng ta xác định không rõ ràng mình đang thao tác ở **BuildContext** nào
   * Chỉ có thể gọi tới ```context4``` để lấy dữ liệu của ClassA && Class B
   * Trường hợp sử dụng ```context2``` ,```context3``` không run code được vì "Undifined"
   * Trường hợp sử dụng ```context```, code sẽ không báo lỗi nhưng khi run sẽ trả ra lỗi **```"ProviderNotFoundException"```** vì chúng ta chỉ có thể truy cập dữ liệu ClassA được bao sau bởi Provider<ClassA>. Mà ```context``` thuộc **WidgetB** và ```Provider<ClassA>``` được bao bởi **WidgetB**
-  
-- Giải thích cho vấn đề trên
-
-    ![stack Overflow](https://github.com/quocbaobui/research_flutter/blob/research_flutter_riverpod/flutter_riverpod/assets/ex_provider_3_wf..png)
-
+- [```Tham khảo thêm ở ví dụ  "provider4_example.dart"```](https://github.com/quocbaobui/research_flutter/blob/main/flutter_riverpod/lib/provider_exp/provider3_example.dart)
+    * **Provider.of<String>(context)** -> Không báo lỗi nhưng khi biên dịch trả về  ProviderNotFoundException
+    ```dart
+    class WidgetB extends StatelessWidget {
+      const WidgetB({Key? key}) : super(key: key);
+    
+      @override
+      Widget build(BuildContext context) {
+        return Provider(
+            create: (context1) => "My String 1",
+            child: Builder(
+              builder: (context2) => Provider(
+                create: (context3) => "My String 2",
+                child: Builder(
+                  builder: (context4) {
+                    print(context2);
+                    String dataReceivedCt2 = "${Provider.of<String>(context)}";
+                    String dataReceivedCt4 = "${Provider.of<String>(context)}";
+                    return Center(
+                        child: Text(
+                            "dataReceivedCt2 $dataReceivedCt2\ndataReceivedCt4 $dataReceivedCt4"));
+                  },
+                ),
+              ),
+            ));
+      }
+    }
+    ```
 
 
 ### 3. Riverpod sẽ giúp chúng ta xử lý các vấn đề trên 
