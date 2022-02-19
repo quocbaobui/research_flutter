@@ -63,10 +63,11 @@
         * ```context.watch<T>()```, tiện ích sẽ listen các thay đổi trên `<T>`
         * ```context.read<T>()```, tiện ích sẽ trả về  `<T>` và không listen
         * ```contextcontext.select<T, R>(R cb(T value))```, listen một vài giá trị trên `<T>`
-### 3. Nhược điểm của Provider 
--   Vì nó dựa trên InheritedWidget nên vẫn phụ thuộc vào **Widget tree**
--   Triển khai Provider phụ thuộc Provider dài dòng
-    * Ví dụ ta có ClassTestB phụ thuộc vào ClassTestA
+
+### 2. Nhược điểm của Provider 
+##### 1. Vì nó dựa trên InheritedWidget nên vẫn phụ thuộc vào ```Widget tree```
+##### 2. Triển khai Provider phụ thuộc vào Provider khác dài dòng. Và sẽ trở thành vấn đề lớn nếu ứng dụng có nhiều Provider phụ thuộc lẫn nhau
+-  Ví dụ ta có ClassTestB phụ thuộc vào ClassTestA
     ```dart
     class ClassTestA {
       String _name = "Quoc Bao";
@@ -88,8 +89,8 @@
       String get myName => "My name ${myFirstClass.getName}";
     }
     ```
-    *  ClassB cần có ClassA để khởi tạo Provider nên cần sử dụng ```MultiProvider``` hoặc ```ProxyProvider``` để khởi chạy. Dưới đây xử dụng **ProxyProvider**
-        ```dart
+- ClassB cần có ClassA để khởi tạo Provider nên cần sử dụng ```MultiProvider``` hoặc ```ProxyProvider``` để khởi chạy.
+    ```dart
          Widget build(BuildContext context) {
             return Provider(
               create: (context2) => ClassTestA(),
@@ -105,26 +106,25 @@
               ),
             );
           }
-        ```
-   * [```Example: provider3_example.dart```](https://github.com/quocbaobui/research_flutter/blob/main/flutter_riverpod/lib/provider_exp/provider3_example.dart)    
-- Vì ở trong bất kì class Widget nào ta cũng có thể truy cập vào provider thông qua 
+    ```
+- [```Example: provider3_example.dart```](https://github.com/quocbaobui/research_flutter/blob/main/flutter_riverpod/lib/provider_exp/provider3_example.dart)    
+#### 3. Vì ở trong bất kì class Widget nào ta cũng có thể truy cập vào provider thông qua 
 ```dart
   Provider.of<AnyType>(context)
 ```
-* Dễ sảy ra ProviderNotFoundException trở thành vấn đề lớn nếu ứng dụng phình to ra. Ở ví dụ trên ta dễ dàng thấy 
-Khi lấy @myName từ class ClassTestB nếu ta truyền  ```context``` thay vì ```context4``` thì trình biên dịch sẽ không báo lỗi, nhưng khi run app thì sẽ báo lỗi ```"Could not find the correct Provider<ClassTestB> above this WidgetB Widget```
+-  Dễ xảy ra lỗi ProviderNotFoundException khi Run code. 
+[```Xem ví dụ "provider3_example.dart"```](https://github.com/quocbaobui/research_flutter/blob/main/flutter_riverpod/lib/provider_exp/provider3_example.dart)
         
-     * Lấy dữ liệu  sai 
-        ```dart
-            Provider.of<ClassTestB>(context).myName;
-        ```
-        
-    * Lấy dữ liệu đúng 
-        ```dart
-            Provider.of<ClassTestB>(context4).myName;
-        ```
+- Nguyên nhân chính của vấn đề ProviderNotFoundException là chúng ta xác định không rõ ràng mình đang thao tác ở **BuildContext** nào
+  * Chỉ có thể gọi tới ```context4``` để lấy dữ liệu của ClassA && Class B
+  * Trường hợp sử dụng ```context2``` ,```context3``` không run code được vì "Undifined"
+  * Trường hợp sử dụng ```context```, code sẽ không báo lỗi nhưng khi run sẽ trả ra lỗi **```"ProviderNotFoundException"```** vì chúng ta chỉ có thể truy cập dữ liệu ClassA được bao sau bởi Provider<ClassA>. Mà ```context``` thuộc **WidgetB** và ```Provider<ClassA>``` được bao bởi **WidgetB**
+  
+- Giải thích cho vấn đề trên
 
-### 4. Riverpod sẽ giúp ứng dụng xử lý các vấn đề trên 
+
+
+### 3. Riverpod sẽ giúp chúng ta xử lý các vấn đề trên 
 
 - ***"Compile safe"***: Biên dịch an toàn, hạn chế tối đa lỗi "ProviderNotFoundException"
 - ***"Provider, without its limitations"*** - Riverpod có hỗ trợ multiple provider có cùng type; kết hợp các providers không đồng bộ & thêm providers từ mọi nơi
