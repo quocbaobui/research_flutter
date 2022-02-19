@@ -17,7 +17,6 @@ class MyAppProviderEx1 extends StatelessWidget {
           floatingActionButton: FloatingActionButton(
             child: Text("Name"),
             onPressed: () {
-              // Provider.of<ClassTestA>(context, listen: false).setName("Nguyen van Toan");
               classTestA.setName("Nguyen van Toan");
             },
           ),
