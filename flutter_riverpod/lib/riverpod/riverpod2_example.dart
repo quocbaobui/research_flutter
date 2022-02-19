@@ -13,6 +13,10 @@ class MyAppRiverpodEx2StateProvider extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen<ClassTestAChangeNotifer>(classAChangeNotifierProvider,
+        (ClassTestAChangeNotifer? previous, ClassTestAChangeNotifer news) {
+      print("ClassTestAChangeNotifer ${news.getName}");
+    });
     return Scaffold(
       appBar: AppBar(title: Text(" Flutter RiverPod Ex2")),
       body: Center(

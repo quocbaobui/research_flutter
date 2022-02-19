@@ -176,7 +176,49 @@ void main() {
 }
 ```
 
-### 2. Triển khai lại các example Provider bằng RiverPod
+### 2. Các type trong Riverpod
+
+#### 1. Provider
+- Trả về bất kì loại type nào 
+- Thường dùng cho ServiceClass 
+#### 2. StateProvider
+- Trả về bất kì loại type nào
+- Thường dùng cho các Simple state object (oject đơn giản)
+#### 3. FutureProvider
+- Trả về Future of any type
+- Thường dùng cho result from an API call
+#### 4. StreamProvider
+- Trả về Stream of any type
+- Thường dùng stream of results from an API
+#### 5. StateNotifierProvider
+- Trả về Subclass of StateNotifier (lớp con của StateNotifier)
+- Thường dùng cho các State Object phức tạp thao tác với giao diện người dùng
+- Theo document Riverpod thì họ ```đề xuất và khuyến khích``` sử dụng StateNotifierProvider để quản lý state với giao diện người dùng
+#### 6. ChangeNotifierProvider
+- Trả về Subclass of ChangeNotifier (lớp con của ChangeNotifier)
+- Thường dùng State Object phức tạp yêu cầu khả năng thay đổi
+- Theo document Riverpod thì họ **```Không khuyến khích```** sử dụng ChangeNotifierProvider
+
+### 3. Đọc dữ liệu với Riverpod
+
+#### 1. ref.watch(classAProvider);
+- Nhận giá trị từ classAProvider và listen thay đổi giá trị 
+- Khi giá trị thay đổi -> rebuild tiện ích
+#### 2. ref.read(classAProvider);
+- Nhận giá trị 1 lần từ classAProvider và không listen
+- Thường dùng để thao tác các event
+#### 3. ref.listen(classAProvider);
+- Listen các thay đổi classAProvider
+- Thường dùng thực hiện các hoạt động như navigating hoặc showDialog hoặc snackbar...
+```dart
+    ref.listen<ClassTestAChangeNotifer>(classAChangeNotifierProvider,
+        (ClassTestAChangeNotifer? previous, ClassTestAChangeNotifer news) {
+      print("ClassTestAChangeNotifer ${news.getName}");
+    });
+```
+- [```Xem đầy đủ ở provider2_example.dart```](https://github.com/quocbaobui/research_flutter/blob/main/flutter_riverpod/lib/provider_exp/provider2_example.dart)
+
+### 4. Triển khai lại các example Provider bằng RiverPod
 
 #### 1. Provider1 - Example, Consumer & ConsumerWidget
 
@@ -294,6 +336,7 @@ void main() {
     }
   }
   ```
+#### 4. WidgetRef là gì
 
         
 

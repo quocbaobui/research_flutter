@@ -27,6 +27,6 @@ void main() {
   runApp(ProviderScope(
       child: MaterialApp(
     title: 'Flutter Riverpod',
-    home: MyAppRiverpodEx3(),
+    home: MyAppRiverpodEx2StateProvider(),
   )));
 }
