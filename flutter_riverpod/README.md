@@ -121,7 +121,7 @@ Khi lấy @myName từ class ClassTestB nếu ta truyền  ```context``` thay v�
         
     * Lấy dữ liệu đúng 
         ```dart
-            Provider.of<ClassTestB>(context).myName;
+            Provider.of<ClassTestB>(context4).myName;
         ```
 
 ### 4. Riverpod sẽ giúp ứng dụng xử lý các vấn đề trên 
