@@ -26,6 +26,12 @@ class ClassTestB {
 
 class ClassTestAChangeNotifer with ChangeNotifier {
   String _name = "Quoc Bao";
+  int _age = 18;
+  int get getAge => _age;
+
+  set age(int age) {
+    _age = age;
+  }
 
   String get getName => _name;
   void setName(String name) {

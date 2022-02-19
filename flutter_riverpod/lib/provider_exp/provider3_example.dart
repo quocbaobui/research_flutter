@@ -7,15 +7,12 @@ class MyAppProviderEx3 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Riverpod',
-      home: Scaffold(
-        appBar: AppBar(title: Text("Flutter Provider Ex3")),
-        // Use ProxyProvider
-        body: WidgetB(),
-        //Use MultiProvider
-        // body: WidgetC(),
-      ),
+    return Scaffold(
+      appBar: AppBar(title: Text("Flutter Provider Ex3")),
+      // Use ProxyProvider
+      body: WidgetB(),
+      //Use MultiProvider
+      // body: WidgetC(),
     );
   }
 }

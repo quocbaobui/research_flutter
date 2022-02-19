@@ -6,12 +6,9 @@ class MyAppProviderEx4 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Riverpod',
-      home: Scaffold(
-        appBar: AppBar(title: Text("Flutter Provider")),
-        body: WidgetB(),
-      ),
+    return Scaffold(
+      appBar: AppBar(title: Text("Flutter Provider")),
+      body: WidgetB(),
     );
   }
 }

@@ -116,7 +116,7 @@
 - Nguyên nhân chính của vấn đề ProviderNotFoundException là chúng ta xác định không rõ ràng mình đang thao tác ở **BuildContext** nào
   * Chỉ có thể gọi tới ```context4``` để lấy dữ liệu của ClassA && Class B
   * Trường hợp sử dụng ```context2``` ,```context3``` không run code được vì "Undifined"
-  * Trường hợp sử dụng ```context```, code sẽ không báo lỗi nhưng khi run sẽ trả ra lỗi **```"ProviderNotFoundException"```** vì chúng ta chỉ có thể truy cập dữ liệu ClassA được bao sau bởi Provider<ClassA>. Mà ```context``` thuộc **WidgetB** và ```Provider<ClassA>``` được bao bởi **WidgetB**
+  * Trường hợp sử dụng ```context```, code sẽ không báo lỗi nhưng khi run sẽ trả ra lỗi **```"ProviderNotFoundException"```** vì chúng ta chỉ có thể truy cập dữ liệu ClassA được bọc trong Provider<ClassA>. Mà ```context``` thuộc **WidgetB** và ```Provider<ClassA>``` được bọc trong **WidgetB**
 - [```Tham khảo thêm ở ví dụ  "provider4_example.dart"```](https://github.com/quocbaobui/research_flutter/blob/main/flutter_riverpod/lib/provider_exp/provider4_example.dart)
     ```dart
     class WidgetB extends StatelessWidget {
@@ -163,21 +163,137 @@
 ### 1. Riverpod 
 
 - Riverpod hỗ trợ quản lý State trong ứng dụng và hoạt động hoàn toàn độc lập với Widget-tree. Giúp việc tách biệt logic ra khỏi Widget
-- Bắt lỗi ngay tại thời điểm biên dịch thay vì sau khi Run code
+- Bắt lỗi ngay tại thời điểm biên dịch thay vì sau khi Run code 
 - Riverpod sử dụng watch() để truy cập tới các Provider. Vì thế có thể có nhiều Provider cùng type
-- Ứng dụng sẽ được bao bời **ProviderScope**
+- Ứng dụng sẽ được bọc trong **ProviderScope**
 ```dart
 void main() {
   runApp(ProviderScope(
       child: MaterialApp(
     title: 'Flutter Riverpod',
-    home: MyAppRiverpod(),
+    home: MyAppRiverpodEx1ConsumerWidget(),
   )));
 }
 ```
 
+### 2. Triển khai lại các example Provider bằng RiverPod
 
+#### 1. Provider1 - Example, Consumer & ConsumerWidget
 
+- Thay vì bọc Provider trong widget như ở [```Example: provider1_example.dart```](https://github.com/quocbaobui/research_flutter/blob/main/flutter_riverpod/lib/provider_exp/provider1_example.dart) đối với Riverpod chúng ta có thể khai báo Provider classTestA như sau
+  ```dart
+  Provider<ClassTestA>  classAProvider = Provider<ClassTestA>((ref) => ClassTestA());
+  ```
+- Sử dụng Consumer để lấy giá trị object như Provider
+  ```dart
+  class MyAppRiverpodEx1Comsumer extends StatelessWidget {
+    const MyAppRiverpodEx1Comsumer({Key? key}) : super(key: key);
+    @override
+    Widget build(BuildContext context) {
+      // Lay du lieu tu classA
+      return Consumer(
+        builder: (context1, ref, child) {
+          String _name = ref.watch(classAProvider).getName;
+          return Scaffold(
+            appBar: AppBar(title: Text("Flutter RiverPod Ex1")),
+            body: Center(child: Text("Your name: $_name")),
+            floatingActionButton: FloatingActionButton(
+              child: Text("Name"),
+              onPressed: () {
+                ref.read(classAProvider).setName("Nguyen van Toan");
+              },
+            ),
+          );
+        },
+      );
+    }
+  }
+  ```
+- Tuy nhiên việc sử dụng Consumer để lấy giá trị object sẽ tạo ra thêm  **```context1```** và khiến code dài dòng hơn. Trong khi đó **Riverpod có hỗ trợ ConsumerWidget**. Ví dụ trên có thể viết lại với ConsumerWidget như sau
+  ```dart
+    class MyAppRiverpodEx1ConsumerWidget extends ConsumerWidget {
+      const MyAppRiverpodEx1ConsumerWidget({Key? key}) : super(key: key);
+      @override
+      Widget build(BuildContext context, WidgetRef ref) {
+        // Lay du lieu tu classA
+        String _name = ref.watch(classAProvider).getName;
+        return Scaffold(
+          appBar: AppBar(title: Text("Flutter RiverPod Ex1")),
+          body: Center(child: Text("Your name: $_name")),
+          floatingActionButton: FloatingActionButton(
+            child: Text("Name"),
+            onPressed: () {
+              ref.read(classAProvider).setName("Nguyen Van Toan");
+            },
+          ),
+        );
+      }
+    }
+  ```
+
+- Ở ví dụ này sẽ không update được state vì khi ta nhấn vào FloatingActionButton thì **ref.watch(classAProvider).getName** sẽ không nhận được giá trị mới là "Nguyen Van Toan"
+
+- [```Xem ví dụ "riverpod1_example.dart"```](google.com)
+
+#### 2. Provider2 - Example Update State với ChangeNotifierProvider
+
+- Ở phần Provider khi cần cập nhật dữ liệu của object trong [```Example: provider2_example.dart```](https://github.com/quocbaobui/research_flutter/blob/main/flutter_riverpod/lib/provider_exp/provider2_example.dart) chúng ta sử dụng **ChangeNotifierProvider** và classTestA được viết lại với **ChangeNotifier**
+- Riverpod ChangeNotifierProvider khai báo như sau
+  ```dart
+  ChangeNotifierProvider<ClassTestAChangeNotifer> classAChangeNotifierProvider =
+    ChangeNotifierProvider<ClassTestAChangeNotifer>(
+        (ref) => ClassTestAChangeNotifer());
+  ```
+- UI triển khai với ConsumerWidget
+  ```dart
+  class MyAppRiverpodEx2StateProvider extends ConsumerWidget {
+    const MyAppRiverpodEx2StateProvider({Key? key}) : super(key: key);
+
+    @override
+    Widget build(BuildContext context, WidgetRef ref) {
+      return Scaffold(
+        appBar: AppBar(title: Text(" Flutter RiverPod Ex2")),
+        body: Center(
+            child: Text(
+                "Your name: ${ref.watch(classAChangeNotifierProvider).getName}")),
+        floatingActionButton: FloatingActionButton(
+          child: Text("Name"),
+          onPressed: () {
+            ref.read(classAChangeNotifierProvider).setName("Nguyen van Toan");
+          },
+        ),
+      );
+    }
+  }
+  ```
+- Sau khi click vào FloatingActionButton thì **ref.watch(classAChangeNotifierProvider).getName** sẽ trả về giá trị mới đó là "Nguyen Van Toan"
+
+- [```Xem ví dụ "riverpod2_example.dart"```](google.com)
+
+### 3. Triển khai Provider phụ thuộc vào Provider với Riverpod
+- Đối với Provider khi triển khai UI chúng ta cần lồng các Provier với nhau và sử dụng ProxyProvider như ở [```Ví dụ provider3_example.dart```](https://github.com/quocbaobui/research_flutter/blob/main/flutter_riverpod/lib/provider_exp/provider3_example.dart)
+- Sử dụng Riverpod khai báo như sau
+  ```dart
+  Provider<ClassTestA> classTestAProvider = Provider<ClassTestA>((ref) {
+  return ClassTestA();
+  });
+  Provider<ClassTestB> classTestBProvider = Provider<ClassTestB>((ref) {
+    ClassTestA _classA = ref.read(classTestAProvider);
+    return ClassTestB(_classA);
+  });
+  ```
+- UI triển khai với ConsumerWidget. Việc triển khai với Riverpod sẽ khiến code ngắn ngọn hơn và dễ đọc hơn
+  ```dart
+  class WidgetB extends ConsumerWidget {
+    const WidgetB({Key? key}) : super(key: key);
+    @override
+    Widget build(BuildContext context, WidgetRef ref) {
+      String _name = ref.watch(classTestBProvider).myName;
+      String _age = ref.watch(classTestAProvider).getAge.toString();
+      return Center(child: Text("$_name - Age $_age "));
+    }
+  }
+  ```
 
         
 
