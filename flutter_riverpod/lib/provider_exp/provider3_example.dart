@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/models/my_class.dart';
+import 'package:flutter_riverpods/models/my_class.dart';
 import 'package:provider/provider.dart';
 
 class MyAppProviderEx3 extends StatelessWidget {

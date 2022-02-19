@@ -1,5 +1,6 @@
 
-# Research Riverpod
+# Research Provider và những điểm yếu của Provider
+
 ### 1. Provider
 - Thư viện quản lý State cho ứng dụng
 - Có thể hiểu Provider là một cải tiến của InheritedWidget. Widget này sẽ cung cấp object ```(ClassTestA)```) mà có thể sử dụng trong **Widget Tree** được bọc bởi Provider
@@ -154,6 +155,27 @@
 - ***"Compile safe"***: Biên dịch an toàn, hạn chế tối đa lỗi "ProviderNotFoundException"
 - ***"Provider, without its limitations"*** - Riverpod có hỗ trợ multiple provider có cùng type. Kết hợp các providers không đồng bộ & thêm providers từ mọi nơi
 - ***Không phụ thuộc vào BuildContext***, có thể listen provider mà **```không cần BuildContext```**
+
+
+
+# Research Flutter Riverpod 1.0.0
+
+### 1. Riverpod 
+
+- Riverpod hỗ trợ quản lý State trong ứng dụng và hoạt động hoàn toàn độc lập với Widget-tree. Giúp việc tách biệt logic ra khỏi Widget
+- Bắt lỗi ngay tại thời điểm biên dịch thay vì sau khi Run code
+- Riverpod sử dụng watch() để truy cập tới các Provider. Vì thế có thể có nhiều Provider cùng type
+- Ứng dụng sẽ được bao bời **ProviderScope**
+```dart
+void main() {
+  runApp(ProviderScope(
+      child: MaterialApp(
+    title: 'Flutter Riverpod',
+    home: MyAppRiverpod(),
+  )));
+}
+```
+
 
 
 
