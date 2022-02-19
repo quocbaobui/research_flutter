@@ -107,21 +107,16 @@
             );
           }
     ```
-- [```Example: provider3_example.dart```](https://github.com/quocbaobui/research_flutter/blob/main/flutter_riverpod/lib/provider_exp/provider3_example.dart)    
-#### 3. Vì ở trong bất kì class Widget nào ta cũng có thể truy cập vào provider thông qua 
-```dart
-  Provider.of<AnyType>(context)
-```
--  Dễ xảy ra lỗi ProviderNotFoundException khi Run code. 
-[```Xem ví dụ "provider3_example.dart"```](https://github.com/quocbaobui/research_flutter/blob/main/flutter_riverpod/lib/provider_exp/provider3_example.dart)
-- Giải thích cho vấn đề trên
-    ![stack Overflow](https://raw.githubusercontent.com/quocbaobui/research_flutter/research_flutter_riverpod/flutter_riverpod/assets/ex_provider_3_wf.png)
+- [```Example: provider3_example.dart```](https://github.com/quocbaobui/research_flutter/blob/main/flutter_riverpod/lib/provider_exp/provider4_example.dart)    
+#### 3. Vì ở trong bất kì class Widget nào ta cũng có thể truy cập vào provider thông qua **```Provider.of<AnyType>(context)```** nên dễ xảy ra lỗi ProviderNotFoundException khi Run code.
+- [```Xem ví dụ "provider3_example.dart"```](https://github.com/quocbaobui/research_flutter/blob/main/flutter_riverpod/lib/provider_exp/provider3_example.dart)
+
+   ![stack Overflow](https://raw.githubusercontent.com/quocbaobui/research_flutter/research_flutter_riverpod/flutter_riverpod/assets/ex_provider_3_wf.png)
 - Nguyên nhân chính của vấn đề ProviderNotFoundException là chúng ta xác định không rõ ràng mình đang thao tác ở **BuildContext** nào
   * Chỉ có thể gọi tới ```context4``` để lấy dữ liệu của ClassA && Class B
   * Trường hợp sử dụng ```context2``` ,```context3``` không run code được vì "Undifined"
   * Trường hợp sử dụng ```context```, code sẽ không báo lỗi nhưng khi run sẽ trả ra lỗi **```"ProviderNotFoundException"```** vì chúng ta chỉ có thể truy cập dữ liệu ClassA được bao sau bởi Provider<ClassA>. Mà ```context``` thuộc **WidgetB** và ```Provider<ClassA>``` được bao bởi **WidgetB**
-- [```Tham khảo thêm ở ví dụ  "provider4_example.dart"```](https://github.com/quocbaobui/research_flutter/blob/main/flutter_riverpod/lib/provider_exp/provider3_example.dart)
-    * **Provider.of<String>(context)** -> Không báo lỗi nhưng khi biên dịch trả về  ProviderNotFoundException
+- [```Tham khảo thêm ở ví dụ  "provider4_example.dart"```](https://github.com/quocbaobui/research_flutter/blob/main/flutter_riverpod/lib/provider_exp/provider4_example.dart)
     ```dart
     class WidgetB extends StatelessWidget {
       const WidgetB({Key? key}) : super(key: key);
@@ -136,8 +131,8 @@
                 child: Builder(
                   builder: (context4) {
                     print(context2);
-                    String dataReceivedCt2 = "${Provider.of<String>(context)}";
-                    String dataReceivedCt4 = "${Provider.of<String>(context)}";
+                    String dataReceivedCt2 = "${Provider.of<String>(context2)}";
+                    String dataReceivedCt4 = "${Provider.of<String>(context4)}";
                     return Center(
                         child: Text(
                             "dataReceivedCt2 $dataReceivedCt2\ndataReceivedCt4 $dataReceivedCt4"));
@@ -148,13 +143,17 @@
       }
     }
     ```
+    * **Provider.of<String>(context)** -> Không báo lỗi nhưng khi biên dịch trả về **```"ProviderNotFoundException"```** 
+    * Trường hợp sử dụng ```context1``` ,```context3``` không run code được vì "Undifined"
+    * **Provider.of<String>(context2)** -> Trả về "My String 1"
+    * **Provider.of<String>(context4)** -> Trả về "My String 2"
 
 
 ### 3. Riverpod sẽ giúp chúng ta xử lý các vấn đề trên 
 
 - ***"Compile safe"***: Biên dịch an toàn, hạn chế tối đa lỗi "ProviderNotFoundException"
-- ***"Provider, without its limitations"*** - Riverpod có hỗ trợ multiple provider có cùng type; kết hợp các providers không đồng bộ & thêm providers từ mọi nơi
-- Không phụ thuộc vào BuildContext, có thể listen provider mà không cần BuildContext
+- ***"Provider, without its limitations"*** - Riverpod có hỗ trợ multiple provider có cùng type. Kết hợp các providers không đồng bộ & thêm providers từ mọi nơi
+- ***Không phụ thuộc vào BuildContext***, có thể listen provider mà **```không cần BuildContext```**
 
 
 
