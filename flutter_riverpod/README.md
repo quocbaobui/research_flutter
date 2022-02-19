@@ -122,6 +122,8 @@
   
 - Giải thích cho vấn đề trên
 
+    ![stack Overflow](https://github.com/quocbaobui/research_flutter/blob/research_flutter_riverpod/flutter_riverpod/assets/ex_provider_3_wf..png)
+
 
 
 ### 3. Riverpod sẽ giúp chúng ta xử lý các vấn đề trên 
