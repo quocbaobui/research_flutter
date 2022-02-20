@@ -312,7 +312,7 @@ void main() {
 
 - [```Xem ví dụ "riverpod2_example.dart"```](google.com)
 
-### 3. Triển khai Provider phụ thuộc vào Provider với Riverpod
+### 3. Provider3 - Example Provider phụ thuộc vào Provider với Riverpod
 - Đối với Provider khi triển khai UI chúng ta cần lồng các Provier với nhau và sử dụng ProxyProvider như ở [```Ví dụ provider3_example.dart```](https://github.com/quocbaobui/research_flutter/blob/main/flutter_riverpod/lib/provider_exp/provider3_example.dart)
 - Sử dụng Riverpod khai báo như sau
   ```dart
@@ -336,7 +336,7 @@ void main() {
     }
   }
   ```
-#### 4. WidgetRef là gì
+
 
         
 
