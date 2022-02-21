@@ -108,7 +108,7 @@
             );
           }
     ```
-- [```Example: provider3_example.dart```](https://github.com/quocbaobui/research_flutter/blob/main/flutter_riverpod/lib/provider_exp/provider4_example.dart)    
+- [```Example: provider3_example.dart```](https://github.com/quocbaobui/research_flutter/blob/main/flutter_riverpod/lib/provider_exp/provider3_example.dart)    
 #### 3. Vì ở trong bất kì class Widget nào ta cũng có thể truy cập vào provider thông qua **```Provider.of<AnyType>(context)```** nên dễ xảy ra lỗi ProviderNotFoundException khi Run code.
 - [```Xem ví dụ "provider3_example.dart"```](https://github.com/quocbaobui/research_flutter/blob/main/flutter_riverpod/lib/provider_exp/provider3_example.dart)
 
@@ -216,7 +216,7 @@ void main() {
       print("ClassTestAChangeNotifer ${news.getName}");
     });
 ```
-- [```Xem đầy đủ ở provider2_example.dart```](https://github.com/quocbaobui/research_flutter/blob/main/flutter_riverpod/lib/provider_exp/provider2_example.dart)
+- [```Xem đầy đủ ở riverpod2_example.dart```](https://github.com/quocbaobui/research_flutter/blob/main/flutter_riverpod/lib/riverpod/riverpod2_example.dart)
 
 ### 4. Triển khai lại các example Provider bằng RiverPod
 
@@ -275,7 +275,7 @@ void main() {
 
 - Ở ví dụ này sẽ không update được state vì khi ta nhấn vào FloatingActionButton thì **ref.watch(classAProvider).getName** sẽ không nhận được giá trị mới là "Nguyen Van Toan"
 
-- [```Xem ví dụ "riverpod1_example.dart"```](google.com)
+- [```Xem đầy đủ ví dụ "riverpod1_example.dart"```](https://github.com/quocbaobui/research_flutter/blob/main/flutter_riverpod/lib/riverpod/riverpod1_example.dart)
 
 #### 2. Provider2 - Example Update State với ChangeNotifierProvider
 
@@ -310,7 +310,7 @@ void main() {
   ```
 - Sau khi click vào FloatingActionButton thì **ref.watch(classAChangeNotifierProvider).getName** sẽ trả về giá trị mới đó là "Nguyen Van Toan"
 
-- [```Xem ví dụ "riverpod2_example.dart"```](google.com)
+- [```Xem đầy đủ ví dụ "riverpod2_example.dart"```](https://github.com/quocbaobui/research_flutter/blob/main/flutter_riverpod/lib/riverpod/riverpod2_example.dart)
 
 ### 3. Provider3 - Example Provider phụ thuộc vào Provider với Riverpod
 - Đối với Provider khi triển khai UI chúng ta cần lồng các Provier với nhau và sử dụng ProxyProvider như ở [```Ví dụ provider3_example.dart```](https://github.com/quocbaobui/research_flutter/blob/main/flutter_riverpod/lib/provider_exp/provider3_example.dart)
@@ -336,6 +336,7 @@ void main() {
     }
   }
   ```
+  - [```Xem đầy đủ ví dụ "riverpod3_example.dart"```](https://github.com/quocbaobui/research_flutter/blob/main/flutter_riverpod/lib/riverpod/riverpod3_example.dart)
 
 
         
