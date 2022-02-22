@@ -7,7 +7,7 @@ List Lib:
 - freezed_annotation: 0.14.2
 
 #### 1. Giới thiệu 
-- Freezed hỗ trợ tạo mã nguồn cho các 
+- Freezed hỗ trợ tạo mã nguồn
 - Freezed_annotation hỗ trợ định nghĩa một số annotations của freezed
 - build_runner là một package độc lập hỗ trợ tạo các file dart
 - json_serializable cung cấp Dart Build System giúp cho quá trình xử lý JSON
