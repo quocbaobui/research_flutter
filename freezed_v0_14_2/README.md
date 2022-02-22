@@ -29,7 +29,7 @@ dev_dependencies:
 
 #### 3. Triển khai
 
-### 1. Class UserInternal triển khai theo cách thông thường
+##### 1. Class UserInternal triển khai theo cách thông thường
 - Thông thường chúng ta sẽ code models theo hướng như sau
     ```dart
         class UserInternal {
@@ -49,7 +49,7 @@ dev_dependencies:
         }
         }
     ```
-### 2. Class UserInternal triển khai với freezed và json_serializable
+##### 2. Class UserInternal triển khai với freezed và json_serializable
 - Khởi tạo UserInternalWF
 ```dart
 import 'package:flutter/foundation.dart';
@@ -97,7 +97,8 @@ flutter pub run build_runner build --delete-conflicting-outputs
 [INFO] Succeeded after 95ms with 0 outputs (0 actions)
 ```
 - Sau khi chạy lệnh trên thì trong thư mục models_freezed sẽ thấy thêm 2 file đó là **"user_internal_w.freezed.dart"** và **"user_internal_w.g.freezed.dart"**
-### 3. Một số mã nguồn được freezed thêm vào
+
+##### 3. Một số mã nguồn được freezed thêm vào
 - toString();
 - toJson();
 - So sánh ==
@@ -107,7 +108,7 @@ flutter pub run build_runner build --delete-conflicting-outputs
 - Một trong những điểm tiện dụng lớn của freezed là khi chúng ta cần sửa một thuộc tính nào trong các lớp model của mình thì chỉ cần cập nhật lại **factory constructors**. Và chạy lại lệnh 
 
 
-#### 4. Một số annotations hay gặp khác của Freezed
+##### 4. Một số annotations hay gặp khác của Freezed
 - @Default sử dụng để chỉ định giá trị mặc định cho thuộc tính đó không được null. Ở ví dụ dưới thì @obtained không null và mặc định luôn là false
 ```dart
 @freezed
