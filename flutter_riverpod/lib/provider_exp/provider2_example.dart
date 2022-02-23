@@ -9,19 +9,20 @@ class MyAppProviderEx2 extends StatelessWidget {
   @override
   Widget build(BuildContext context1) {
     return ChangeNotifierProvider<ClassTestAChangeNotifer>(
-      create: (context3) => ClassTestAChangeNotifer(),
+      create: (context2) => ClassTestAChangeNotifer(),
       child: Consumer<ClassTestAChangeNotifer>(
-          builder: (context4, classTestA, child) {
-        debugPrint(" Rebuild MyAppProviderEx2 ");
+          builder: (context3, classTestA, child) {
         return Scaffold(
           appBar: AppBar(title: Text(" Provider MyAppProviderEx2")),
           body: Center(
               child: Text(
-                  "Your name: ${context4.read<ClassTestAChangeNotifer>().getName}")),
+                  "Your name: ${classTestA.getName} - age ${classTestA.getAge}")),
           floatingActionButton: FloatingActionButton(
-            child: Text("Name"),
+            child: Icon(Icons.edit),
             onPressed: () {
-              classTestA.setName("Nguyen van Toan");
+              classTestA.setName("Nguyen van Toan ${classTestA.getAge}");
+              context3.read<ClassTestAChangeNotifer>().setAge =
+                  classTestA.getAge + 1;
             },
           ),
         );

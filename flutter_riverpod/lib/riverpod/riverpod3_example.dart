@@ -27,7 +27,6 @@ class WidgetB extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     String _name = ref.watch(classTestBProvider).myName;
     String _age = ref.watch(classTestAProvider).getAge.toString();
     return Center(child: Text("$_name - Age $_age "));

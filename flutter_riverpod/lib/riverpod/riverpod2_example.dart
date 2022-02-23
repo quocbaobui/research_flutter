@@ -13,19 +13,36 @@ class MyAppRiverpodEx2StateProvider extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ClassTestAChangeNotifer _classTestA =
+        ref.watch(classAChangeNotifierProvider);
+
     ref.listen<ClassTestAChangeNotifer>(classAChangeNotifierProvider,
         (ClassTestAChangeNotifer? previous, ClassTestAChangeNotifer news) {
-      print("ClassTestAChangeNotifer ${news.getName}");
+      print("listen<ClassTestAChangeNotifer> ${news.getName}");
+
+      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      //   content: Text('${news.getName}'),
+      //   duration: const Duration(seconds: 1),
+      //   action: SnackBarAction(
+      //     label: 'ACTION',
+      //     onPressed: () {},
+      //   ),
+      // ));
     });
+
     return Scaffold(
       appBar: AppBar(title: Text(" Flutter RiverPod Ex2")),
       body: Center(
           child: Text(
-              "Your name: ${ref.watch(classAChangeNotifierProvider).getName}")),
+              "Your name: ${_classTestA.getName} - age ${_classTestA.getAge}")),
       floatingActionButton: FloatingActionButton(
-        child: Text("Name"),
+        child: Icon(Icons.edit),
         onPressed: () {
-          ref.read(classAChangeNotifierProvider).setName("Nguyen van Toan");
+          ref
+              .read(classAChangeNotifierProvider)
+              .setName("Nguyen van Toan ${_classTestA.getAge}");
+          ref.read(classAChangeNotifierProvider).setAge =
+              _classTestA.getAge + 1;
         },
       ),
     );

@@ -13,11 +13,14 @@ class MyAppProviderEx1 extends StatelessWidget {
       child: Consumer<ClassTestA>(builder: (context, classTestA, child) {
         return Scaffold(
           appBar: AppBar(title: Text(" Provider Ex1")),
-          body: Center(child: Text("Your name: ${classTestA.getName}")),
+          body: Center(
+              child: Text(
+                  "Your name: ${classTestA.getName} - age ${classTestA.getAge}")),
           floatingActionButton: FloatingActionButton(
-            child: Text("Name"),
+            child: Icon(Icons.edit),
             onPressed: () {
-              classTestA.setName("Nguyen van Toan");
+              classTestA.setName("Nguyen van Toan ${classTestA.getAge}");
+              classTestA.setAge = classTestA.getAge + 1;
             },
           ),
         );

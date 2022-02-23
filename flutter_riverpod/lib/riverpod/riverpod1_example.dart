@@ -12,14 +12,18 @@ class MyAppRiverpodEx1Comsumer extends StatelessWidget {
     // Lay du lieu tu classA
     return Consumer(
       builder: (context1, ref, child) {
-        String _name = ref.watch(classAProvider).getName;
+        ClassTestA _classTestA = ref.watch(classAProvider);
+        print("Rebuild MyAppRiverpodEx1Comsumer");
         return Scaffold(
           appBar: AppBar(title: Text("Flutter RiverPod Ex1")),
-          body: Center(child: Text("Your name: $_name")),
+          body: Center(
+              child: Text(
+                  "Your name: ${_classTestA.getName} - age ${_classTestA.getAge}")),
           floatingActionButton: FloatingActionButton(
-            child: Text("Name"),
+            child: Icon(Icons.edit),
             onPressed: () {
-              ref.read(classAProvider).setName("Nguyen van Toan");
+              _classTestA.setName("Nguyen van Toan ${_classTestA.getAge}");
+              _classTestA.setAge = _classTestA.getAge + 1;
             },
           ),
         );
@@ -33,14 +37,20 @@ class MyAppRiverpodEx1ConsumerWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // Lay du lieu tu classA
-    String _name = ref.watch(classAProvider).getName;
+    ClassTestA _classTestA = ref.watch(classAProvider);
+    print("Rebuild MyAppRiverpodEx1ConsumerWidget");
     return Scaffold(
       appBar: AppBar(title: Text("Flutter RiverPod Ex1")),
-      body: Center(child: Text("Your name: $_name")),
+      body: Center(
+          child: Text(
+              "Your name: ${_classTestA.getName} - age ${_classTestA.getAge}")),
       floatingActionButton: FloatingActionButton(
-        child: Text("Name"),
+        child: Icon(Icons.edit),
         onPressed: () {
-          ref.read(classAProvider).setName("Nguyen van Toan");
+          ref
+              .read(classAProvider)
+              .setName("Nguyen van Toan ${_classTestA.getAge}");
+          ref.read(classAProvider).setAge = _classTestA.getAge + 1;
         },
       ),
     );
