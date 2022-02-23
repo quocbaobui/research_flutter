@@ -1,13 +1,37 @@
 import 'package:flutter/material.dart';
 import 'example.dart';
-import 'models/school_model.dart';
 import 'service_locator.dart';
+import 'services/app_service.dart';
 
-void main() {
-  setupLocator();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await setupLocator();
 
-  // Tăng thêm 1 tuổi
-  locator.get<Students>().increaseAge(locator.get<Students>().age + 1);
+  // getIt.isReady<AppService>().then((_) {
+  //   return getIt<AppService>().increaseTotalOpenApp();
+  // });
 
-  runApp(const MaterialApp(home: WidgetAGetIt()));
+  // // getIt.all
+  runApp(MaterialApp(
+      home: FutureBuilder(
+        // Kiểm tra hoàn thành setupLocator
+          future: getIt.allReady(),
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (snapshot.hasData) {
+              getIt.get<AppService>().increaseTotalOpenApp();
+              return const WidgetAGetIt();
+            } else {
+              return Scaffold(
+                body: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: const [
+                    CircularProgressIndicator(),
+                    SizedBox(height: 8.0),
+                    Text("Splash Page")
+                  ],
+                ),
+              );
+            }
+          })));
 }

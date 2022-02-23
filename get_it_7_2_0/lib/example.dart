@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get_it_7_2_0/models/school_model.dart';
-import 'package:get_it_7_2_0/service_locator.dart';
+
+import 'service_locator.dart';
+import 'services/app_service.dart';
 
 class WidgetAGetIt extends StatefulWidget {
   const WidgetAGetIt({Key? key}) : super(key: key);
@@ -16,14 +18,8 @@ class _WidgetAGetItState extends State<WidgetAGetIt> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: const WidgetB(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          int _age = locator.get<Students>().age;
-          locator.get<Students>().increaseAge(_age + 1);
-        },
-      ),
+    return const Scaffold(
+      body: WidgetB(),
     );
   }
 }
@@ -55,11 +51,11 @@ class WidgetD extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Students _students = locator.get<Students>();
-
     debugPrint("Rebuild WidgetD");
     return Center(
-      child: Text(_students.toString()),
+      child: Text("Total Open App: ${getIt.get<AppService>().getTotalOpenApp}"),
     );
   }
 }
+
+//  ${getIt.get<AppService>().getTotalOpenApp}
