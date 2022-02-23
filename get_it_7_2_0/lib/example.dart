@@ -20,8 +20,8 @@ class _WidgetAGetItState extends State<WidgetAGetIt> {
       body: const WidgetB(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Thêm 1 tuổi
-          locator.get<Students>().increaseAge();
+          int _age = locator.get<Students>().age;
+          locator.get<Students>().increaseAge(_age + 1);
         },
       ),
     );

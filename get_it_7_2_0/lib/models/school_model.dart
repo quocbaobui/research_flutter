@@ -27,8 +27,8 @@ class Students {
   final ClassRoom classRoom;
   Students({required this.name, required this.age, required this.classRoom});
 
-  increaseAge() {
-    age = age + 1;
+  increaseAge(int newAge) {
+    age = newAge;
     debugPrint(age.toString());
   }
 

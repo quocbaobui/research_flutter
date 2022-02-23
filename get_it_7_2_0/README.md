@@ -55,8 +55,16 @@
     .getAsync<T>() 
     ```
 
+### 4. Ưu điểm
 
-### 4.Nguồn Tham khảo
+- Có thể request tất cả các type ở bất kì đâu
+- Hỗ trợ đăng ký SingleTon và Factory
+
+### 5. Nhược điểm
+
+- Vì có thể request type ở bất kì đâu,với dữ liệu đa hướng. Nếu không dùng cẩn thận có thể sẽ khiến phần mềm khó bảo trì 
+
+### 6.Nguồn Tham khảo
 - https://www.burkharts.net/apps/blog/one-to-find-them-all-how-to-use-service-locators-with-flutter/
 - https://www.burkharts.net/apps/blog/lets-get-this-party-started-startup-orchestration-with-getit/
 - https://pub.dev/packages/get_it
