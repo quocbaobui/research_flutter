@@ -2,30 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:injectables/service_locator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class WidgetAGetIt extends StatefulWidget {
-  const WidgetAGetIt({Key? key}) : super(key: key);
-  @override
-  _WidgetAGetItState createState() => _WidgetAGetItState();
-}
+import 'services/app_service.dart';
 
-class _WidgetAGetItState extends State<WidgetAGetIt> {
-  @override
-  void initState() {
-    // RegisterModule _registerModule = getIt.get<RegisterModule>();
-    SharedPreferences sharedPreferences = getIt.get<SharedPreferences>();
-    sharedPreferences.setInt("test", 15);
-    // AuthService authService = getIt<AuthService>();
-
-    super.initState();
-  }
+class WidgetA extends StatelessWidget {
+  const WidgetA({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: const WidgetB(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-      ),
+    return const Scaffold(
+      body: WidgetB(),
     );
   }
 }
@@ -60,8 +45,8 @@ class WidgetD extends StatelessWidget {
     // );
     debugPrint("Rebuild WidgetD");
     return Center(
-      child: Text(
-          "Getit Injection test ${getIt.get<SharedPreferences>().getInt("test")}"),
+      // child: Container(),
+      child: Text("Total Open App: ${getIt.get<AppService>().getTotalOpenApp}"),
     );
   }
 }
