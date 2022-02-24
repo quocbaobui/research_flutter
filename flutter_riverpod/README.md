@@ -154,9 +154,6 @@
 
 - ***"Compile safe"***: Biên dịch an toàn, hạn chế tối đa lỗi "ProviderNotFoundException"
 - ***"Provider, without its limitations"*** - Riverpod có hỗ trợ multiple provider có cùng type. Kết hợp các providers không đồng bộ & thêm providers từ mọi nơi
-- ***Không phụ thuộc vào BuildContext***, có thể listen provider mà **```không cần BuildContext```**
-
-
 
 # Research Flutter Riverpod 1.0.0
 
@@ -200,7 +197,8 @@ void main() {
 - Theo document Riverpod thì họ **```Không khuyến khích```** sử dụng ChangeNotifierProvider
 
 ### 3. Đọc dữ liệu với Riverpod
-
+    
+- Riverpod có hỗ trợ WidgetRef , WidgetRef này sẽ chứa tất cả các Provider được khai báo, vì thế các provider này sau khi khai báo có thể sử dụng ở mọi nơi trong ứng dụng
 #### 1. ref.watch(classAProvider);
 - Nhận giá trị từ classAProvider và listen thay đổi giá trị 
 - Khi giá trị thay đổi -> rebuild tiện ích
