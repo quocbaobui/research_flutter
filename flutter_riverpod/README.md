@@ -198,8 +198,7 @@ void main() {
 
 ### 3. Đọc dữ liệu với Riverpod
     
-- Riverpod có hỗ trợ WidgetRef , WidgetRef này sẽ chứa tất cả các Provider được khai báo, vì thế các provider này sau khi khai báo có thể sử dụng ở mọi nơi trong ứng dụng
-#### 1. ref.watch(classAProvider);
+- Riverpod có hỗ trợ WidgetRef, theo tài liệu Riverpod định nghĩa WidgetRef là một đối tượng cho phép các widget tương tác với các Provider. Có thể hiểu là WidgetRef sẽ cho phép chúng ta truy cập bất kì provider nào mà chúng ta mong muốn, bởi vì theo thiết kế của Riverpod thì các Provider là Global
 - Nhận giá trị từ classAProvider và listen thay đổi giá trị 
 - Khi giá trị thay đổi -> rebuild tiện ích
 #### 2. ref.read(classAProvider);
